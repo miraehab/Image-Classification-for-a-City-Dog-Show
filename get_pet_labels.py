@@ -58,9 +58,4 @@ def get_pet_labels(image_dir):
           label += word + " "
       label = label.strip()
       results_dic[low_filename] = label
-
-      for key in results_dic:
-        print(key, " ", results_dic[key])
     return results_dic
-
-#get_pet_labels("pet_images/")
