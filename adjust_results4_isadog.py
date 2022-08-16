@@ -66,5 +66,27 @@ def adjust_results4_isadog(results_dic, dogfile):
                maltese) (string - indicates text file's filename)
     Returns:
            None - results_dic is mutable data type so no return needed.
-    """           
+    """        
+    dog_names = []
+    #Read the dogs names from the file
+    with open(dogfile) as df:
+      while True:
+        dog = df.readline()
+        dog_names += dog.strip()
+        if not dog:
+          break
+
+    for key in results_dic:
+      # 1: of-a-dog, 0: not of-a-dog
+      #if the image pet label exists append 1 else append 0
+      if results_dic[key][0] in dog_names:
+        results_dic[key] += int(1)
+      else:
+        results_dic[key] += int(0)
+
+      #if the classifier label exists append 1 else append 0
+      if results_dic[key][1] in dog_names:
+        results_dic[key] += int(1)
+      else:
+        results_dic[key] += int(0)
     None
