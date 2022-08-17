@@ -80,13 +80,13 @@ def adjust_results4_isadog(results_dic, dogfile):
       # 1: of-a-dog, 0: not of-a-dog
       #if the image pet label exists append 1 else append 0
       if results_dic[key][0] in dog_names:
-        results_dic[key] += int(1)
+        results_dic[key].append(int(1))
       else:
-        results_dic[key] += int(0)
+        results_dic[key].append(int(0))
 
       #if the classifier label exists append 1 else append 0
       if results_dic[key][1] in dog_names:
-        results_dic[key] += int(1)
+        results_dic[key].append(int(1))
       else:
-        results_dic[key] += int(0)
+        results_dic[key].append(int(0))
     None
