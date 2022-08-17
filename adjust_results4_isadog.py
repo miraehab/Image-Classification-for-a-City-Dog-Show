@@ -85,8 +85,13 @@ def adjust_results4_isadog(results_dic, dogfile):
         results_dic[key].append(int(0))
 
       #if the classifier label exists append 1 else append 0
-      if results_dic[key][1] in dog_names:
-        results_dic[key].append(int(1))
-      else:
+      classifierlabel = results_dic[key][1].split(',')
+      flag = True
+      for i in classifierlabel:
+        if i.strip().lower() in dog_names:
+          results_dic[key].append(int(1))
+          flag = False
+          break
+      if flag:
         results_dic[key].append(int(0))
     None

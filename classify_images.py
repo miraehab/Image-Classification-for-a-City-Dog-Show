@@ -70,15 +70,14 @@ def classify_images(images_dir, results_dic, model):
     for filename in results_dic:
       img_path = images_dir + filename
       if path.exists(img_path):
-        classifierlabel = classifier(img_path, model)
+        classifierlabel = classifier(img_path, model).lower().strip()
       else:
         img_path = images_dir + filename[0].upper() + filename[1:]
-        classifierlabel = classifier(img_path, model)
+        classifierlabel = classifier(img_path, model).lower().strip()
       
-      classifierlabel.lower()
-      classifierlabel.strip()
-      value = [results_dic[filename], classifierlabel.lower()]
-      if results_dic[filename] == classifierlabel:
+      value = [results_dic[filename], classifierlabel.lower().strip()]
+      classifierlabel.split(',')
+      if results_dic[filename] in classifierlabel:
         value.append(int(1))
       else: 
         value.append(int(0))
