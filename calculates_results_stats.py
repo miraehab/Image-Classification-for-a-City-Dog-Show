@@ -2,8 +2,8 @@
 # -*- coding: utf-8 -*-
 # */AIPND-revision/intropyproject-classify-pet-images/calculates_results_stats.py
 #                                                                             
-# PROGRAMMER:
-# DATE CREATED:                                  
+# PROGRAMMER:   Mira Ehab
+# DATE CREATED:      17/8/2022                            
 # REVISED DATE: 
 # PURPOSE: Create a function calculates_results_stats that calculates the 
 #          statistics of the results of the programrun using the classifier's model 
@@ -68,6 +68,36 @@ def calculates_results_stats(results_dic):
                      and the previous topic Calculating Results in the class for details
                      on how to calculate the counts and statistics.
     """        
-    # Replace None with the results_stats_dic dictionary that you created with 
     # this function 
-    return None
+    results_stats_dic  = {
+        'n_images': len(results_dic),
+        'n_dogs_img': 0,
+        'n_notdogs_img': 0,
+        'n_match': 0,
+        'n_correct_dogs': 0,
+        'n_correct_notdogs': 0,
+        'n_correct_breed': 0,
+        'pct_match': 0,
+        'pct_correct_dogs': 0,
+        'pct_correct_breed': 0,
+        'pct_correct_notdogs': 0
+    }
+    for key in results_dic:
+        if results_dic[key][2] == 1:
+                results_stats_dic['n_match'] += 1
+        if results_dic[key][3] == 1 and results_dic[key][4] == 1:
+                results_stats_dic['n_correct_dogs'] += 1
+        if results_dic[key][3] == 0 and results_dic[key][4] == 0:
+                results_stats_dic['n_correct_notdogs'] += 1
+        if results_dic[key][3] == 1:
+                results_stats_dic['n_dogs_img'] += 1
+        if results_dic[key][3] == 0:
+                results_stats_dic['n_notdogs_img'] += 1
+        if results_dic[key][3] == 1 and results_dic[key][2] == 1:
+                results_stats_dic['n_correct_breed'] += 1
+
+    results_stats_dic['pct_match'] = (float(results_stats_dic['n_match'])/results_stats_dic['n_images'])*100
+    results_stats_dic['pct_correct_dogs'] = (float(results_stats_dic['n_correct_dogs'])/results_stats_dic['n_dogs_img'])*100
+    results_stats_dic['pct_correct_breed'] = (float(results_stats_dic['n_correct_breed'])/results_stats_dic['n_dogs_img'])*100
+    results_stats_dic['pct_correct_notdogs'] = (float(results_stats_dic['n_correct_notdogs'])/results_stats_dic['n_notdogs_img'])*100
+    return results_stats_dic

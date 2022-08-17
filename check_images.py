@@ -4,7 +4,7 @@
 #
 # TODO 0: Add your information below for Programmer & Date Created.                                                                             
 # PROGRAMMER: Mira Ehab
-# DATE CREATED:                                  
+# DATE CREATED:    16/8/2022                              
 # REVISED DATE: 
 # PURPOSE: Classifies pet images using a pretrained CNN model, compares these
 #          classifications to the true identity of the pets in the images, and
