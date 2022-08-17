@@ -83,21 +83,36 @@ def calculates_results_stats(results_dic):
         'pct_correct_notdogs': 0
     }
     for key in results_dic:
-        if results_dic[key][2] == 1:
-                results_stats_dic['n_match'] += 1
-        if results_dic[key][3] == 1 and results_dic[key][4] == 1:
-                results_stats_dic['n_correct_dogs'] += 1
-        if results_dic[key][3] == 0 and results_dic[key][4] == 0:
-                results_stats_dic['n_correct_notdogs'] += 1
         if results_dic[key][3] == 1:
-                results_stats_dic['n_dogs_img'] += 1
-        if results_dic[key][3] == 0:
-                results_stats_dic['n_notdogs_img'] += 1
-        if results_dic[key][3] == 1 and results_dic[key][2] == 1:
-                results_stats_dic['n_correct_breed'] += 1
+            results_stats_dic["n_dogs_img"] += 1
+        else:
+            results_stats_dic["n_notdogs_img"] += 1
+
+        # check if there was a match between pet label and classifier
+        if results_dic[key][2] == 1:
+            results_stats_dic["n_match"] += 1
+
+            # check if the match was classified as a dog
+            if results_dic[key][3] == 1:
+                results_stats_dic["n_correct_breed"] += 1
+
+        # check if the label had pet as a dog and the classifier had them as a dog
+        if results_dic[key][3] == 1 and results_dic[key][4] == 1:
+            results_stats_dic["n_correct_dogs"] += 1
+
+        # check if the label had pet as a non-dog and the classifier had them as a non-dog
+        if results_dic[key][3] == 0 and results_dic[key][4] == 0:
+            results_stats_dic["n_correct_notdogs"] += 1
 
     results_stats_dic['pct_match'] = (float(results_stats_dic['n_match'])/results_stats_dic['n_images'])*100
-    results_stats_dic['pct_correct_dogs'] = (float(results_stats_dic['n_correct_dogs'])/results_stats_dic['n_dogs_img'])*100
-    results_stats_dic['pct_correct_breed'] = (float(results_stats_dic['n_correct_breed'])/results_stats_dic['n_dogs_img'])*100
-    results_stats_dic['pct_correct_notdogs'] = (float(results_stats_dic['n_correct_notdogs'])/results_stats_dic['n_notdogs_img'])*100
+    if results_stats_dic['n_dogs_img'] == 0:
+        results_stats_dic['pct_correct_dogs'] = 0
+        results_stats_dic['pct_correct_breed']
+    else:
+        results_stats_dic['pct_correct_dogs'] = (float(results_stats_dic['n_correct_dogs'])/results_stats_dic['n_dogs_img'])*100
+        results_stats_dic['pct_correct_breed'] = (float(results_stats_dic['n_correct_breed'])/results_stats_dic['n_dogs_img'])*100
+    if results_stats_dic['n_notdogs_img'] == 0:
+        results_stats_dic['pct_correct_notdogs'] = 0
+    else:
+        results_stats_dic['pct_correct_notdogs'] = (float(results_stats_dic['n_correct_notdogs'])/results_stats_dic['n_notdogs_img'])*100
     return results_stats_dic
