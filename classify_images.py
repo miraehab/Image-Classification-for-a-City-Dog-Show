@@ -77,7 +77,7 @@ def classify_images(images_dir, results_dic, model):
       
       classifierlabel.lower()
       classifierlabel.strip()
-      value = [results_dic[filename], classifierlabel]
+      value = [results_dic[filename], classifierlabel.lower()]
       if results_dic[filename] == classifierlabel:
         value.append(int(1))
       else: 
