@@ -43,7 +43,7 @@ def main():
     # Sets Start time
     start_time = time()
     # To Test the code time
-    sleep(75)
+    #sleep(75)
     
     # TODO 1: Define get_input_args function within the file get_input_args.py
     # This function retrieves 3 Command Line Arugments from user as input from
@@ -64,6 +64,8 @@ def main():
     # This function creates the results dictionary that contains the results, 
     # this dictionary is returned from the function call as the variable results
     results = get_pet_labels(in_arg.dir)
+    """ for key in results:
+        print(key, " ", results[key]) """
 
     # Function that checks Pet Images in the results Dictionary using results    
     check_creating_pet_image_labels(results)
