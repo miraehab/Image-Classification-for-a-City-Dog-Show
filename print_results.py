@@ -72,7 +72,7 @@ def print_results(results_dic, results_stats_dic, model,
     # Print all the percentages
     for key in results_dic:
         if key[0] == 'p':
-                print("{:20}: {:3d}".format(key, results_dic[key]))
+                print("{}: {}".format(key, results_dic[key]))
 
     # IF print_incorrect_dogs == True AND there were images incorrectly 
     if print_incorrect_dogs and  ((results_stats_dic['n_correct_dogs'] + results_stats_dic['n_correct_notdogs']) != results_stats_dic['n_images'] ) :
